@@ -1,77 +1,99 @@
 task_name = []
 task_status = []
 task_duration = []
+
+def add_task() :
+    Name = input(("Say your task name: ")).lower()
+    if Name not in task_name :
+        task_name.append(Name)
+        task_status.append(False)
+        task_duration.append(None)
+        print("Added!")
+    else : print("This task name is repeated!")
+
+def display_all_products() :
+    for i , name in enumerate(task_name) :
+        print(f"{i+1} , Task Name: {name} , Task Status: {task_status[i]} , Task Duration: {task_duration[i]}")
+
+def remove_task() :
+    name_for_remove = input(("Say the task name that you want to remove it: ")).lower()
+    if name_for_remove in task_name :
+        index = task_name.index(name_for_remove)
+        task_name.pop(index)
+        task_status.pop(index)
+        task_duration.pop(index)
+        print("Removed!")
+    else : print("Your task name not found!")
+
+def edit_task() :
+    name_for_edit = input(("Say the task name that you want to edit it: ")).lower()
+    if name_for_edit in task_name :
+        new_name = input(("Say the new task name: "))
+        if new_name not in task_name : 
+            index = task_name.index(name_for_edit)
+            task_name[index] = new_name
+            print("Edited!")
+        else : ("This task name is repeated!")
+    else : ("Your task name not found!")
+
+def search_task() :
+    name_for_search = input(("Say the task name that you want to search it: ")).lower()
+    if name_for_search in task_name :
+        index = task_name.index(name_for_search)
+        status = task_status[index]
+        duration = task_duration[index]
+        print(f"Status of you task : {status} , Duration of your task : {duration}.")
+    else : ("Your task name not found!")
+
+def mark_task_as_done() :
+    name_for_mark = input(("Say the task name that you done it: ")).lower()
+    if name_for_mark in task_name :
+        index = task_name.index(name_for_mark)
+        if task_status[index] == False :
+            task_status[index] = True
+            duration = float(input("Say the time of you task in hours: "))
+            task_duration.insert(index , duration)
+        else : print("This task mark done!")
+        print("Marked!")
+    else : print("Your task name not found!")
+
+def display_details() :
+    len_tasks = len(task_name)
+    Done = task_status.count(True)
+    Undone = task_status.count(False)
+    sum_duration = []
+    for s in task_duration :
+        if s :
+            sum_duration.append(s)
+    sum_duration1 = sum(sum_duration)
+    for i , name in enumerate(task_name) :
+        print(f"""Total Tasks: {len_tasks} , Total time of all tasks: {sum_duration1} , Total Done Tasks: {Done} , Total Undone Tasks: {Undone}""")
+# Main
+
 for i in range(200) :
     Answer = input(("add task , display all products , remove task , edit task , search task , mark task as done , display details , help , exit ")).lower()
-    if Answer == "add task" :
-        Name = input(("Say your task name: ")).lower()
-        if Name not in task_name :
-            task_name.append(Name)
-            task_status.append(False)
-            task_duration.append(None)
-            print("Added!")
-        else : print("This task name is repeated!")
+
+    if Answer == "add task" : 
+            add_task()
 
     elif Answer == "display all products" :
-        for i , name in enumerate(task_name) :
-            print(f"{i+1} , Task Name: {name} , Task Status: {task_status[i]} , Task Duration: {task_duration[i]}")
+        display_all_products()
 
     elif Answer == "remove task" :
-        name_for_remove = input(("Say the task name that you want to remove it: ")).lower()
-        if name_for_remove in task_name :
-            index = task_name.index(name_for_remove)
-            task_name.pop(index)
-            task_status.pop(index)
-            task_duration.pop(index)
-            print("Removed!")
-        else : print("Your task name not found!")
+        remove_task()
 
     elif Answer == "edit task" :
-        name_for_edit = input(("Say the task name that you want to edit it: ")).lower()
-        if name_for_edit in task_name :
-            new_name = input(("Say the new task name: "))
-            if new_name not in task_name : 
-                index = task_name.index(name_for_edit)
-                task_name[index] = new_name
-                print("Edited!")
-            else : ("This task name is repeated!")
-        else : ("Your task name not found!")
+        edit_task()
 
     elif Answer == "search task" :
-        name_for_search = input(("Say the task name that you want to search it: ")).lower()
-        if name_for_search in task_name :
-            index = task_name.index(name_for_search)
-            status = task_status[index]
-            duration = task_duration[index]
-            print(f"Status of you task : {status} , Duration of your task : {duration}.")
-        else : ("Your task name not found!")
+        search_task()
+
 
     elif Answer == "mark task as done" :
-        name_for_mark = input(("Say the task name that you done it: ")).lower()
-        if name_for_mark in task_name :
-            index = task_name.index(name_for_mark)
-            if task_status[index] == False :
-                task_status[index] = True
-                duration = float(input("Say the time of you task in hours: "))
-                task_duration.insert(index , duration)
-            else : print("This task mark done!")
-            print("Marked!")
-        else : print("Your task name not found!")
+        mark_task_as_done()
 
     elif Answer == "display details" :
-        len_tasks = len(task_name)
-        Done = task_status.count(True)
-        Undone = task_status.count(False)
-        sum_duration = []
-        for s in task_duration :
-            if s :
-                sum_duration.append(s)
-        sum_duration1 = sum(sum_duration)
-        for i , name in enumerate(task_name) :
-            print(f"""Total Tasks: {len_tasks} , Total time of all tasks: {sum_duration1} , Total Done Tasks: {Done} , Total Undone Tasks: {Undone}""")
-
-        
-
+        display_details()
 
     elif Answer == "help" :
             print("""
