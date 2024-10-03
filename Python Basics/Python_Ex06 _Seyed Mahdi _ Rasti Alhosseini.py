@@ -70,7 +70,7 @@ def display_details() :
         print(f"""Total Tasks: {len_tasks} , Total time of all tasks: {sum_duration1} , Total Done Tasks: {Done} , Total Undone Tasks: {Undone}""")
 # Main
 
-for i in range(200) :
+while True :
     Answer = input(("add task , display all products , remove task , edit task , search task , mark task as done , display details , help , exit ")).lower()
 
     if Answer == "add task" : 
